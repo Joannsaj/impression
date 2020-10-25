@@ -2,7 +2,7 @@ from flask import render_template
 from . import main
 # from .models import pitch
 from .forms import PitchForm
-Review = review.Review
+# Review = review.Review
 
 # Views
 @main.route('/')
@@ -19,10 +19,11 @@ def new_pitch(id):
 
     if form.validate_on_submit():
         title = form.title.data
-        review = form.review.data
-        new_review = Review(movie.id,title,movie.poster,review)
+        pitch = form.pitch.data
+        category = form.category,data
+        new_pitch = Pitch(movie.id,title,movie.poster,review)
         new_review.save_review()
         return redirect(url_for('movie',id = movie.id ))
 
     title = 'Pitches// new pitch'
-    return render_template('new_review.html',title = title, review_form=form, movie=movie)    
+    return render_template('pitches.html',title = title, pitch_form = form, movie=movie)    
