@@ -13,17 +13,17 @@ def index():
     '''
     return render_template('index.html')
 
-@main.route('/pitches', methods = ['GET','POST'])
-def new_pitch(id):
-    form = PitchForm()
+# @main.route('/pitches', methods = ['GET','POST'])
+# def new_pitch():
+#     form = PitchForm()
 
-    if form.validate_on_submit():
-        title = form.title.data
-        pitch = form.pitch.data
-        category = form.category,data
-        new_pitch = Pitch(movie.id,title,movie.poster,review)
-        new_review.save_review()
-        return redirect(url_for('movie',id = movie.id ))
+#     if form.validate_on_submit():
+#         title = form.title.data
+#         pitch = form.pitch.data
+#         category = form.category,data
+#         new_pitch = Pitch(movie.id,title,movie.poster,review)
+#         new_review.save_review()
+#         return redirect(url_for('movie',id = movie.id ))
 
-    title = 'Pitches// new pitch'
-    return render_template('pitches.html',title = title, pitch_form = form, movie=movie)    
+#     title = 'Pitches// new pitch'
+#     return render_template('pitches.html',title = title, pitch_form = form, movie=movie)    
