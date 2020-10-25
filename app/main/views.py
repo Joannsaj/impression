@@ -1,6 +1,6 @@
-from flask import render_template
+from flask import render_template,request,redirect,url_for,abort
 from . import main
-# from .models import pitch
+from ..models import User
 from flask_login import login_required
 from .forms import PitchForm
 # Review = review.Review
@@ -12,7 +12,8 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    return render_template('index.html')
+    title = 'Home||Pitches'
+    return render_template('index.html', title = title)
 
 # @main.route('/pitches', methods = ['GET','POST'])
 # @login_required
@@ -29,3 +30,12 @@ def index():
 
 #     title = 'Pitches// new pitch'
 #     return render_template('pitches.html',title = title, pitch_form = form, movie=movie)    
+
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
