@@ -96,22 +96,22 @@ class Downvote(db.Model):
     def __repr__(self):
         return f'User {self.downvote}'        
 
-# class Comment(db.Model):
-#     __tablename__ = 'comments'
+class Comment(db.Model):
+    __tablename__ = 'comments'
 
-#     id = db.Column(db.Integer,primary_key = True)
-#     commment = db.Column(db.String(255))
-#     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-#     pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    id = db.Column(db.Integer,primary_key = True)
+    commment = db.Column(db.String(255))
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
     
-#     def save_comment(self):
-#         db.session.add(self)
-#         db.session.commit()
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
 
-#     @classmethod
-#     def get_comments(cls,id):
-#         comments = Comment.query.filter_by(pitch_id=id).all()
-#         return comments
+    @classmethod
+    def get_comments(cls,id):
+        comments = Comment.query.filter_by(pitch_id=id).all()
+        return comments
 
-#     def __repr__(self):
-#         return f'User {self.comment}'           
+    def __repr__(self):
+        return f'User {self.comment}'           
