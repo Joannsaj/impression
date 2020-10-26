@@ -4,9 +4,10 @@
         {%if category%}
         {% for pitch in category %}
         <h3 class="card-title">{{pitch.pitch_title}}</h3>
+        <h4 class="card-subtitle mb-2 text-muted">Posted by {{pitch.user.username}}</h4>
         <h4 class="card-subtitle mb-2 text-muted">Category: {{pitch.category}}</h4>
         <h4 class="card-text">{{pitch.pitch}}</h4>
-        <a href="/comment/new/{{pitch.id}}" class="card-link">Comment</a>
+        <a href="{{url_for('main.new_comment',pitch_id = pitch.id)}}" class="card-link">Comment</a>
         <a href="#" class="card-link">Another link</a>
         {% endfor %}
         {%else%}

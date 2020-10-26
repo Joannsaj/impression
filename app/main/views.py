@@ -31,7 +31,7 @@ def new_pitch():
         pitch = form.pitch.data
         category = form.category.data
 
-        new_pitch = Pitch(pitch_title = pitch_title, pitch = pitch, category = category)
+        new_pitch = Pitch(pitch_title = pitch_title, pitch = pitch, category = category, user=current_user)
 
         new_pitch.save_pitch()
         return redirect(url_for('main.index'))
@@ -40,22 +40,22 @@ def new_pitch():
     return render_template('pitches.html',title = title, pitch_form = form)  
 
 
-@main.route('/comment/new/<int:id>', methods = ['GET','POST'])
+@main.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
 @login_required
-def new_comment(id):
+def new_comment(pitch_id):
     form = CommentForm()
-    pitch = Pitch.query.get(id)
+    pitch = Pitch.query.get(pitch_id)
     if form.validate_on_submit():
         comment = form.comment.data
 
         # Updated review instance
-        new_comment = Comment(comment = comment,user=current_user)
+        new_comment = Comment(comment = comment,user=current_user, pitch_id = pitch_id)
 
         # save review method
         new_comment.save_comment()
         return redirect(url_for('.new_comment'))
 
-    comments = Comment.query.filter_by(id = id).all()
+    comments = Comment.query.filter_by(pitch_id = pitch_id).all()
     title = 'New comments'
     return render_template('comment.html',title = title, comment_form=form, comment_list = comments)
 
