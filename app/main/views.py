@@ -40,24 +40,24 @@ def new_pitch():
     return render_template('pitches.html',title = title, pitch_form = form)  
 
 
-@main.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
+@main.route('/view_comments/<id>')
 @login_required
-def new_comment(pitch_id):
-    form = CommentForm()
-    pitch = Pitch.query.get(pitch_id)
+def view_comments(id):
+    comment = Comment.get_comments(id)
+    title = "View Comments"
+    return render_template('comment.html', comment_list= comment, title=title)
+
+@main.route('/comment/<int:pitch_id>', methods=['GET', 'POST'])
+@login_required
+def comment(pitch_id):
+    form= CommentForm()
+    pitch = Pitch.query.filter_by(id= pitch_id).first()
     if form.validate_on_submit():
         comment = form.comment.data
-
-        # Updated review instance
-        new_comment = Comment(comment = comment,user=current_user, pitch_id = pitch_id)
-
-        # save review method
+        new_comment = Comment(comment=comment, user_id = current_user.id, pitch_id = pitch_id)
         new_comment.save_comment()
-        return redirect(url_for('.new_comment'))
-
-    comments = Comment.query.filter_by(pitch_id = pitch_id).all()
-    title = 'New comments'
-    return render_template('comment.html',title = title, comment_form=form, comment_list = comments)
+        return redirect(url_for('main.index'))
+    return render_template('new_comment.html', comment_form= form,pitch_id=pitch_id)
 
 
 @main.route('/user/<uname>')

@@ -1,14 +1,14 @@
 {% macro display(category) %}
 <div class="card">
-    <div class="card-body">
+    <div class="card-body bg-secondary text-white">
         {%if category%}
         {% for pitch in category %}
         <h3 class="card-title">{{pitch.pitch_title}}</h3>
         <h4 class="card-subtitle mb-2 text-muted">Posted by {{pitch.user.username}}</h4>
         <h4 class="card-subtitle mb-2 text-muted">Category: {{pitch.category}}</h4>
         <h4 class="card-text">{{pitch.pitch}}</h4>
-        <a href="{{url_for('main.new_comment',pitch_id = pitch.id)}}" class="card-link">Comment</a>
-        <a href="#" class="card-link">Another link</a>
+        <p><a href="/comment/{{pitch.id}}" class="card-link">Add a Comment</a></p>
+        <p><a href="/view_comments/{{pitch.id}}" class="card-link">View comments</a></p>
         {% endfor %}
         {%else%}
         <p>No pitches</p>
