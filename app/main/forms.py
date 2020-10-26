@@ -1,11 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,TextAreaField,SubmitField
+from wtforms import StringField,TextAreaField,SubmitField,RadioField
 from wtforms.validators import Required
 
 class PitchForm(FlaskForm):
 
     title = StringField('Pitch title',validators=[Required()])
     pitch = TextAreaField('Pitch', validators=[Required()])
+    category = RadioField('Category', choices=[('Interview','Interview'),('Slogan','Slogan'),('Advertisement','Advertisement'),('Pickup-lines','Pickup-lines')],validators=[Required()])
     submit = SubmitField('Submit')
 
 class UpdateProfile(FlaskForm):
@@ -17,9 +18,7 @@ class CommentForm(FlaskForm):
     submit = SubmitField('Submit') 
 
 class Upvote(FlaskForm):
-    upvote = TextAreaField('Like',validators = [Required()])
-    submit = SubmitField('Submit') 
+    submit = SubmitField('Like') 
 
 class Downvote(FlaskForm):
-    dislike = TextAreaField('Dislike',validators = [Required()])
-    submit = SubmitField('Submit')             
+    submit = SubmitField('Dislike')             

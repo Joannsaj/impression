@@ -1,0 +1,17 @@
+{% macro display(category) %}
+<div class="card">
+    <div class="card-body">
+        {%if category%}
+        {% for pitch in category %}
+        <h3 class="card-title">{{pitch.pitch_title}}</h3>
+        <h4 class="card-subtitle mb-2 text-muted">Category: {{pitch.category}}</h4>
+        <h4 class="card-text">{{pitch.pitch}}</h4>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+        {% endfor %}
+        {%else%}
+        <p>No pitches</p>
+        {% endif %}
+    </div>
+</div>
+{% endmacro %}
