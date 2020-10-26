@@ -19,7 +19,7 @@ def index():
     advertisements = Pitch.query.filter_by(category = 'Advertisement').all()
     pickup = Pitch.query.filter_by(category = 'Pickup-lines')
     title = 'Home||Pitches'
-    return render_template('index.html', title = title, interview = interview, slogan = slogan, advertisements = advertisements, pickup = pickup)
+    return render_template('index.html', title = title, pitches = pitches, interview = interview, slogan = slogan, advertisements = advertisements, pickup = pickup)
 
 @main.route('/pitches', methods = ['GET','POST'])
 @login_required
@@ -54,7 +54,7 @@ def comment(pitch_id):
     pitch = Pitch.query.filter_by(id= pitch_id).first()
     if form.validate_on_submit():
         comment = form.comment.data
-        new_comment = Comment(comment=comment, user_id = current_user.id, pitch_id = pitch_id)
+        new_comment = Comment(comment=comment, user = current_user, pitch_id = pitch_id)
         new_comment.save_comment()
         return redirect(url_for('main.index'))
     return render_template('new_comment.html', comment_form= form,pitch_id=pitch_id)

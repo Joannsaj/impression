@@ -10,6 +10,7 @@
                     {%if comment_list %}
                     {% for comment in comment_list %}
                     <h4>{{comment.comment}}</h4>
+                    <h5>-By {{comment.user.username}}</h5>
                     {% endfor %}
                     {%else%}
                     <p>No pitches</p>
