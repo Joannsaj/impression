@@ -1,9 +1,9 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..models import User,Pitch#, Comment, Upvote, Downvote
+from ..models import User,Pitch, Comment#, Upvote, Downvote
 from flask_login import login_required, current_user
 from .. import db
-from .forms import PitchForm, UpdateProfile #, CommentForm, Upvote, Downvote
+from .forms import PitchForm, UpdateProfile , CommentForm#, Upvote, Downvote
 # Review = review.Review
 
 # Views
@@ -39,29 +39,25 @@ def new_pitch():
     title = 'Pitches// new pitch'
     return render_template('pitches.html',title = title, pitch_form = form)  
 
-# 
-# @main.route('/movie/review/new/<int:id>', methods = ['GET','POST'])
-# @login_required
-# def new_review(id):
-#     form = ReviewForm()
-#     movie = get_movie(id)
-#     if form.validate_on_submit():
-#         title = form.title.data
-#         review = form.review.data
 
-#         # Updated review instance
-#         new_review = Review(movie_id=movie.id,movie_title=title,image_path=movie.poster,movie_review=review,user=current_user)
+@main.route('/comment/new/<int:id>', methods = ['GET','POST'])
+@login_required
+def new_comment(id):
+    form = CommentForm()
+    pitch = Pitch.query.get(id)
+    if form.validate_on_submit():
+        comment = form.comment.data
 
-#         # save review method
-#         new_review.save_review()
-#         return redirect(url_for('.movie',id = movie.id ))
+        # Updated review instance
+        new_comment = Comment(comment = comment,user=current_user)
 
-#     title = f'{movie.title} review'
-#     return render_template('new_review.html',title = title, review_form=form, movie=movie)
-# # 
-# # 
-#  
-#   
+        # save review method
+        new_comment.save_comment()
+        return redirect(url_for('.new_comment'))
+
+    comments = Comment.query.filter_by(id = id).all()
+    title = 'New comments'
+    return render_template('comment.html',title = title, comment_form=form, comment_list = comments)
 
 
 @main.route('/user/<uname>')
