@@ -6,7 +6,7 @@ Nansamba Joan
 This  is a flask application that allows users to sign up, post pitches of different categories such as interview pitches, slogan pitches, pickup lines and advertisement pitches and also vote on pitches.
 
 ## Live Link
-[View Site](..)
+[View Site](https://impressionapp.herokuapp.com/)
 
 ## User Story
 * See the pitches posted by other users.
@@ -17,10 +17,10 @@ This  is a flask application that allows users to sign up, post pitches of diffe
 
 ## Development Installation
 
-Clone the repository at ....
-Run the application at python3.6 manage.py server or ./start.sh
-Test the application at python3.6 manage.py test
-Open the application on your browser `127.0.0.1:5000`.
+- Clone the repository at https://github.com/Joannsaj/impression.git
+- Run the application at python3.6 manage.py server or ./start.sh
+- Test the application at python3.6 manage.py test
+- Open the application on your browser `127.0.0.1:5000`.
 
 
 ## Technology used
